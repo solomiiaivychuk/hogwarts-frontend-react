@@ -1,0 +1,11 @@
+.Header {
+    width: 100%;
+    position: sticky;
+    align-self: flex-start !important;
+    justify-self: flex-start !important;
+    display: flex;
+    justify-content: space-between;
+}
+.HeaderElement {
+    margin: 0 5rem;
+}

@@ -1,0 +1,16 @@
+.FormWrapper {
+    display: flex;
+    justify-content: center;
+    margin: 5rem 0;
+}
+.FormCard {
+    width: 70%;
+    padding: 3rem;
+}
+.Form {
+    padding-top: 2rem;
+    text-align: left;
+}
+.SkillsList {
+    width: 70%;
+}
