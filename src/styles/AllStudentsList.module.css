@@ -1,0 +1,8 @@
+.ListWrapper {
+    display: flex;
+    justify-content: center;
+}
+.ListCard {
+    margin: 1rem 0;
+    padding-bottom: 30rem;
+}

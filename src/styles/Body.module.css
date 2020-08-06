@@ -4,4 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-image: url("./hogw-map.jpg");
+    background-size: cover;
+    background-position: center;
 }

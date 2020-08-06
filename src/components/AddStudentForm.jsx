@@ -34,13 +34,17 @@ const AddStudentForm = () => {
     const handleParseltongueLevel = (event) => {
         setParseltongueLevel(event.target.value);
     }
-
+    const handleSubmit = (event) => {
+        event.preventDefault();
+    }
 
     return (
         <div className={styles.FormWrapper}>
         <Card className={styles.FormCard}>
             <h4>Fill the student's data</h4>
-            <Form className={styles.Form}>
+            <Form
+                className={styles.Form}
+                onSubmit={(event) => handleSubmit(event)}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control type="email" placeholder="Enter email" />
