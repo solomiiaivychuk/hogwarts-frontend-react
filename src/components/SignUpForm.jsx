@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import styles from '../styles/SignupForm.module.css'
@@ -9,10 +9,10 @@ const SignUpForm = () => {
     const [email, setEmail] = useState('');
     const [password1, setPassword1] = useState('');
     const [password2, setPassword2] = useState('');
-    const [admin, setAdmin] = useState(null);
+    const [admin, setAdmin] = useState({});
     const [errorMessage, setErrorMessage] = useState('');
     const adminContext = useContext(AdminContext)
-
+    let newAdmin = {};
 
     const onEmailChange = (event) => {
         setEmail(event.target.value)
@@ -26,16 +26,16 @@ const SignUpForm = () => {
         setPassword2(event.target.value);
     }
 
-    const handleLogin = (event) => {
+    const handleSignup = (event) => {
         event.preventDefault();
         if (email.length < 1) {
-            setErrorMessage('Please provida a valid email')
+            setErrorMessage('Please provid a valid email')
         } else if (password1.length < 6) {
             setErrorMessage("Password's minimum length is 6 characters")
         } else if (password1 != password2) {
             setErrorMessage("Passwords do not match")
         } else {
-            const newAdmin = ({
+            newAdmin = ({
                 email: email,
                 password1: password1,
                 password2: password2,
@@ -46,7 +46,7 @@ const SignUpForm = () => {
 
     return (
         <Form
-            onSubmit={handleLogin}
+            onSubmit={handleSignup}
         >
             {errorMessage && (
                 <Alert variant={'danger'}>

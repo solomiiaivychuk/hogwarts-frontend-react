@@ -1,0 +1,12 @@
+.SkillsChart {
+    display: flex !important;
+    flex-direction: column;
+    margin-left: 3rem;
+}
+.Legend {
+    font-family: 'Kalam', cursive;
+    padding-top: 2rem;
+}
+.LegendItem {
+    text-decoration: none;
+}

@@ -1,17 +1,15 @@
 .ListItem {
     margin: 1rem 0;
-    display: flex !important;
-    flex-direction: column !important;
     font-size: 1.2rem;
     font-family: 'Kalam', cursive;
-
+    display: flex !important;
+    justify-content: space-between;
 }
 .ListItemChildren {
-    margin: 1rem 15rem;
+    margin: 1rem;
 }
 .ListItemButtons {
-    display: flex;
-    justify-content: space-around;
+
 }
 .SkillsList {
     list-style-type: none;

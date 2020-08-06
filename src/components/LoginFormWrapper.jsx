@@ -1,13 +1,13 @@
-import React, {useState} from 'react'
+import React from 'react'
 import Card from 'react-bootstrap/Card'
 import styles from '../styles/LoginFormWrapper.module.css'
 import SignUpForm from './SignUpForm'
 import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
-import LoginForm from './LoginForm'
+import LoginForm from './LoginForm';
+import AdminContext from "../context/AdminContext";
 
 
 const LoginFormWrapper = () => {
-    const [admin, setAdmin] = useState(null);
 
     return (
         <Router>
@@ -21,11 +21,11 @@ const LoginFormWrapper = () => {
                     <Card.Header>
 
                         <Link to={'/'}>
-                            Sign up
+                            Login
                         </Link>
                         <span> / </span>
-                        <Link to={'/login'}>
-                            Login
+                        <Link to={'/signup'}>
+                            Sign up
                         </Link>
 
                     </Card.Header>
@@ -36,16 +36,17 @@ const LoginFormWrapper = () => {
                         <Card.Title> Please enter your email and password </Card.Title>
                         <Switch>
                             <Route exact path={"/"}>
-                                <SignUpForm></SignUpForm>
-                            </Route>
-                            <Route path={"/login"}>
                                 <LoginForm></LoginForm>
+                            </Route>
+                            <Route path={"/signup"}>
+                                <SignUpForm></SignUpForm>
                             </Route>
                         </Switch>
                     </Card.Body>
                 </Card>
             </div>
         </Router>
+
     )
 }
 

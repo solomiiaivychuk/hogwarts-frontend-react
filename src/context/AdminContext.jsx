@@ -1,8 +1,8 @@
 import React from 'react'
 
 const AdminContext = React.createContext({
-    admin: !null,
-    setUser: (admin) => {},
+    admin: null,
+    setAdmin: () => {},
     logout: () => {}
 })
 export default AdminContext

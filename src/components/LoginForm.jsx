@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import styles from '../styles/LoginForm.module.css'
@@ -11,7 +11,7 @@ const LoginForm = () => {
     const [admin, setAdmin] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');
     const adminContext = useContext(AdminContext);
-
+    console.log(adminContext);
 
     const onEmailChange = (event) => {
         setEmail(event.target.value)
@@ -33,9 +33,14 @@ const LoginForm = () => {
                 email: email,
                 password: password,
             });
+            setAdmin(newAdmin);
+            adminContext.setAdmin(newAdmin);
         }
     }
 
+    useEffect(() => {
+        console.log(admin);
+    }, [admin]);
 
     return (
         <Form
