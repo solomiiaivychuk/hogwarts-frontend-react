@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import styles from '../styles/AddStudentForm.module.css'
+import SkillsContext from "../context/SkillsContext";
 
 const AddStudentForm = () => {
     const [email, setEmail] = useState('');
@@ -23,6 +24,8 @@ const AddStudentForm = () => {
     const [apparateDesired, setApparateDesired] = useState(false);
     const [metamorphmagiDesired, setMetamorphMagiDesired] = useState(false);
     const [parseltongueDesired, setParseltongueDesired] = useState(false);
+
+    const desSkillsContext = useContext(SkillsContext);
 
     const existingSkillsArray = [
         {
@@ -90,6 +93,7 @@ const AddStudentForm = () => {
     for (let skill of desiredSkillsArray) {
         if (skill.desired === true) {
             studentDesiredSkills.push(skill);
+            desSkillsContext.desiredSkills.push(skill);
         }
     };
 

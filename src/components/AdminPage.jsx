@@ -7,11 +7,14 @@ import Card from 'react-bootstrap/Card'
 import stylesBackground from '../styles/AdminPage.module.css'
 import StudentPage from "./StudentPage";
 import EditForm from "./EditForm";
+import SkillsContext from "../context/SkillsContext";
 
 const AdminPage = () => {
     const [students, addStudents] = useState([]);
+    const [desiredSkills, setDesiresSkills] = useState([]);
 
     return (
+        <SkillsContext.Provider value={desiredSkills}>
             <Router>
                 <Card className={styles.Header}>
                     <Card.Header>
@@ -38,7 +41,7 @@ const AdminPage = () => {
                     </div>
                 </Card>
             </Router>
-        //</StudentsContext.Provider>
+        </SkillsContext.Provider>
     )
 }
 
