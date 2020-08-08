@@ -1,10 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import styles from '../styles/AddStudentForm.module.css'
 
 const AddStudentForm = () => {
+    const [email, setEmail] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [potionMakingLevel, setPotionMakingLevel] = useState('')
     const [spellsLevel, setSpellsLevel] = useState('');
     const [quidditchLevel, setQuidditchLevel] = useState('');
@@ -12,6 +15,95 @@ const AddStudentForm = () => {
     const [apparateLevel, setApparateLevel] = useState('');
     const [metamorphmagiLevel, setMetamorphMagiLevel] = useState('');
     const [parseltongueLevel, setParseltongueLevel] = useState('');
+
+    const [potionMakingDesired, setPotionMakingDesired] = useState(false);
+    const [spellsDesired, setSpellsDesired] = useState(false);
+    const [quidditchDesired, setQuidditchDesired] = useState(false);
+    const [animagusDesired, setAnimagusDesired] = useState(false);
+    const [apparateDesired, setApparateDesired] = useState(false);
+    const [metamorphmagiDesired, setMetamorphMagiDesired] = useState(false);
+    const [parseltongueDesired, setParseltongueDesired] = useState(false);
+
+    const existingSkillsArray = [
+        {
+            name: 'Potion Making',
+            level: potionMakingLevel,
+        },
+        {
+            name: 'Spells',
+            level: spellsLevel,
+        },
+        {
+            name: 'Quidditch',
+            level: quidditchLevel,
+        },
+        {
+            name: 'Animagus',
+            level: animagusLevel,
+        },
+        {
+            name: 'Apparate',
+            level: apparateLevel,
+        },
+        {
+            name: 'Metamorphmagi',
+            level: metamorphmagiLevel,
+        },
+        {
+            name: 'Parsel Tongue',
+            level: parseltongueLevel,
+        },
+    ]
+
+    const desiredSkillsArray = [
+        {
+            name: 'Potion Making',
+            desired: potionMakingDesired
+        },
+        {
+            name: 'Spells',
+            desired: spellsDesired,
+        },
+        {
+            name: 'Quidditch',
+            desired: quidditchDesired,
+        },
+        {
+            name: 'Animagus',
+            desired: animagusDesired,
+        },
+        {
+            name: 'Apparate',
+            desired: apparateDesired,
+        },
+        {
+            name: 'Metamorphmagi',
+            desired: metamorphmagiDesired,
+        },
+        {
+            name: 'Parsel Tongue',
+            desired: parseltongueDesired,
+        }
+    ];
+
+    const studentDesiredSkills = [];
+    for (let skill of desiredSkillsArray) {
+        if (skill.desired === true) {
+            studentDesiredSkills.push(skill);
+        }
+    };
+
+    const handleEmailChange = (event) => {
+        setEmail(event.target.value);
+    }
+
+    const handleFirstNameChange = (event) => {
+        setFirstName(event.target.value);
+    }
+
+    const handleLastNameChange = (event) => {
+        setLastName(event.target.value);
+    }
 
     const handlePotionMakingLevel = (event) => {
         setPotionMakingLevel(event.target.value);
@@ -34,8 +126,44 @@ const AddStudentForm = () => {
     const handleParseltongueLevel = (event) => {
         setParseltongueLevel(event.target.value);
     }
+    const handlePotionMakingDesired = (event) => {
+        setPotionMakingDesired(!potionMakingDesired);
+    }
+
+    const handleSpellsDesired = (event) => {
+        setSpellsDesired(!spellsDesired);
+    }
+
+    const handleQuidditchDesired = (event) => {
+        setQuidditchDesired(!spellsDesired);
+    }
+
+    const handleAnimagusDesired = (event) => {
+        setAnimagusDesired(!spellsDesired);
+    }
+
+    const handleApparateDesired = (event) => {
+        setApparateDesired(!apparateDesired);
+    }
+
+    const handleMetamorphmagiDesired = (event) => {
+        setMetamorphMagiDesired(!metamorphmagiDesired);
+    }
+
+    const handleParselTongueDesired = (event) => {
+        setParseltongueDesired(!parseltongueDesired);
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
+        const student = {
+            email: email,
+            firstName: firstName,
+            lastName: lastName,
+            existingSkills: existingSkillsArray,
+            desiredSkills: studentDesiredSkills,
+        }
+        console.log(student);
     }
 
     return (
@@ -47,17 +175,28 @@ const AddStudentForm = () => {
                 onSubmit={(event) => handleSubmit(event)}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" placeholder="Enter email" />
+                    <Form.Control
+                        type="email"
+                        placeholder="Enter email"
+                        onChange={(event) => handleEmailChange(event)}/>
                 </Form.Group>
 
                 <Form.Group >
                     <Form.Label>First name</Form.Label>
-                    <Form.Control type="text" placeholder="Enter first name" />
+                    <Form.Control
+                        type="text"
+                        placeholder="Enter first name"
+                        onChange={(event) => handleFirstNameChange(event)}
+                    />
                 </Form.Group>
 
                 <Form.Group >
                     <Form.Label>Last name</Form.Label>
-                    <Form.Control type="text" placeholder="Enter last name" />
+                    <Form.Control
+                        type="text"
+                        placeholder="Enter last name"
+                        onChange={(event) => handleLastNameChange(event)}
+                    />
                 </Form.Group>
 
                     <Form.Group controlId="formBasicRange" className={styles.SkillsList}>
@@ -114,13 +253,41 @@ const AddStudentForm = () => {
 
                 <Form.Group controlId="formBasicCheckbox">
                     <Form.Label>Student's desired skills : </Form.Label>
-                    <Form.Check type="checkbox" label="Potion making" />
-                    <Form.Check type="checkbox" label="Spells" />
-                    <Form.Check type="checkbox" label="Quidditch" />
-                    <Form.Check type="checkbox" label="Animagus" />
-                    <Form.Check type="checkbox" label="Apparate" />
-                    <Form.Check type="checkbox" label="Metamorphmagi" />
-                    <Form.Check type="checkbox" label="Parseltongue" />
+                    <Form.Check
+                        type="checkbox"
+                        label="Potion making"
+                        onChange={(event) => handlePotionMakingDesired(event)}
+                    />
+                    <Form.Check
+                        type="checkbox"
+                        label="Spells"
+                        onChange={(event) => handleSpellsDesired(event)}
+                    />
+                    <Form.Check
+                        type="checkbox"
+                        label="Quidditch"
+                        onChange={(event) => handleQuidditchDesired(event)}
+                    />
+                    <Form.Check
+                        type="checkbox"
+                        label="Animagus"
+                        onChange={handleAnimagusDesired}
+                    />
+                    <Form.Check
+                        type="checkbox"
+                        label="Apparate"
+                        onChange={handleApparateDesired}
+                    />
+                    <Form.Check
+                        type="checkbox"
+                        label="Metamorphmagi"
+                        onChange={handleMetamorphmagiDesired}
+                    />
+                    <Form.Check
+                        type="checkbox"
+                        label="Parseltongue"
+                        onChange={handleParselTongueDesired}
+                    />
                 </Form.Group>
                 <Button variant="primary" type="submit">
                     Add student
