@@ -28,12 +28,18 @@ const ListItem = () => {
     return studList.map((student) => (
         <>
             <ListGroup.Item as="li" key={student.email} className={styles.ListItem}>
-                <span className={styles.ListItemChildren}> {student.fname} {student.lname} </span>
+                <span className={styles.ListItemChildren}>
+                        {student.fname} {student.lname}
+                </span>
+                <span className={styles.ListItemChildren}>
+                    <a href={`/student/${student.email}`}>
+                        {student.email}
+                    </a>
+                </span>
                 <span className={styles.ListItemChildren}>
                     <Button
                         variant="warning"
-                        onClick={handleEdit}
-                    >Edit</Button>
+                    ><a href={`/edit/${student.email}`}>Edit</a></Button>
                     {' '}
                     <Button
                         variant="danger"

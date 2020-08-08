@@ -1,0 +1,24 @@
+.StudentCard {
+    display: flex;
+    justify-content: center;
+    font-family: 'Kalam', cursive;
+    margin: 5rem 5rem 20rem 5rem;
+}
+.CardBody {
+    padding: 5rem !important;
+    display: flex;
+    flex-direction: column;
+}
+.StudentName {
+    font-size: 2rem;
+}
+.SkillsList {
+    margin-top: 2rem;
+}
+.SkillsTitle {
+    font-size: 1.2rem;
+    line-height: 2rem;
+}
+.SkillsItem {
+    list-style-type: none;
+}

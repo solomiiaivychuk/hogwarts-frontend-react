@@ -5,14 +5,13 @@ import AddStudentForm from './AddStudentForm'
 import AllStudentsList from './AllStudentsList'
 import Card from 'react-bootstrap/Card'
 import stylesBackground from '../styles/AdminPage.module.css'
-import StudentsContext from "../context/StudentsContext";
-
+import StudentPage from "./StudentPage";
+import EditForm from "./EditForm";
 
 const AdminPage = () => {
     const [students, addStudents] = useState([]);
 
     return (
-        //<StudentsContext.Provider value={{students, addStudents}}>
             <Router>
                 <Card className={styles.Header}>
                     <Card.Header>
@@ -30,6 +29,10 @@ const AdminPage = () => {
                             </Route>
                             <Route path={'/add-student'}>
                                 <AddStudentForm/>
+                            </Route>
+                            <Route path={'/student/:email'} children={<StudentPage />}>
+                            </Route>
+                            <Route path={'/edit/:edit'} children={<EditForm />}>
                             </Route>
                         </Switch>
                     </div>
