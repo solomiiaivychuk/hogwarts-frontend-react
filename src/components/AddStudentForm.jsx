@@ -10,6 +10,7 @@ const AddStudentForm = () => {
     const [email, setEmail] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+
     const [potionMakingLevel, setPotionMakingLevel] = useState('')
     const [spellsLevel, setSpellsLevel] = useState('');
     const [quidditchLevel, setQuidditchLevel] = useState('');
@@ -90,10 +91,16 @@ const AddStudentForm = () => {
         }
     ];
 
+    const studentExistingSkills = [];
+    for (let skill of existingSkillsArray) {
+        if (skill.level != "") {
+            studentExistingSkills.push(skill);
+        }
+    }
     const studentDesiredSkills = [];
     for (let skill of desiredSkillsArray) {
         if (skill.desired === true) {
-            studentDesiredSkills.push(skill);
+            studentDesiredSkills.push(skill.name);
             //desSkillsContext.desiredSkills.push(skill);
         }
     };
@@ -159,20 +166,18 @@ const AddStudentForm = () => {
         setParseltongueDesired(!parseltongueDesired);
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const student = {
             email: email,
-            firstName: firstName,
-            lastName: lastName,
-            existingSkills: existingSkillsArray,
-            desiredSkills: studentDesiredSkills,
+            first_name: firstName,
+            last_name: lastName,
+            existing_skills: studentExistingSkills,
+            desired_skills: studentDesiredSkills,
         }
-        console.log(student);
-        const studentOnBackend = async () => {
-            await addNewStudent(student);
-            console.log("added " + student);
-        }
+        console.log(JSON.stringify(student));
+        await addNewStudent(student);
+        console.log("added " + student);
     }
 
     return (

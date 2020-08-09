@@ -12,6 +12,7 @@ const ListItem = () => {
 
     useEffect(() => {
         setStudList(studContext.students);
+        console.log(studList);
         }, [studList]
     );
 
@@ -25,11 +26,11 @@ const ListItem = () => {
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
 
-    return studList.map((student) => (
+    return studContext.studentsFromBE.map((student) => (
         <>
             <ListGroup.Item as="li" key={student.email} className={styles.ListItem}>
                 <span className={styles.ListItemChildren}>
-                        {student.fname} {student.lname}
+                        {student.first_name} {student.last_name}
                 </span>
                 <span className={styles.ListItemChildren}>
                     <a href={`/student/${student.email}`}>

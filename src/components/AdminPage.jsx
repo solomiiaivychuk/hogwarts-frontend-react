@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom";
 import styles from '../styles/Header.module.css'
 import AddStudentForm from './AddStudentForm'
@@ -7,14 +7,16 @@ import Card from 'react-bootstrap/Card'
 import stylesBackground from '../styles/AdminPage.module.css'
 import StudentPage from "./StudentPage";
 import EditForm from "./EditForm";
-import SkillsContext from "../context/SkillsContext";
+import StudentsContext from "../context/StudentsContext";
+import {getStudentsList} from "../lib/api";
 
 const AdminPage = () => {
     const [students, addStudents] = useState([]);
     const [desiredSkills, setDesiresSkills] = useState([]);
 
+
     return (
-        <SkillsContext.Provider value={desiredSkills}>
+
             <Router>
                 <Card className={styles.Header}>
                     <Card.Header>
@@ -33,15 +35,15 @@ const AdminPage = () => {
                             <Route path={'/add-student'}>
                                 <AddStudentForm/>
                             </Route>
-                            <Route path={'/student/:email'} children={<StudentPage />}>
+                            <Route path={'/student/:email'} children={<StudentPage/>}>
                             </Route>
-                            <Route path={'/edit/:edit'} children={<EditForm />}>
+                            <Route path={'/edit/:edit'} children={<EditForm/>}>
                             </Route>
                         </Switch>
                     </div>
                 </Card>
             </Router>
-        </SkillsContext.Provider>
+
     )
 }
 

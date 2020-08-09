@@ -1,4 +1,5 @@
 import React from 'react'
+import { getStudentsList } from "../lib/api";
 
 const mockStudents =
     [
@@ -53,7 +54,7 @@ const mockStudents =
     ];
 
 const StudentsContext = React.createContext({
-    students: mockStudents,
-    addStudents: () => {}
+    studentsFromBE: [],
+    //addStudents: () => {}
 })
 export default StudentsContext
