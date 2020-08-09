@@ -18,3 +18,21 @@ export function addNewStudent(studentData) {
         return error;
     }
 }
+
+export function signUp(admin) {
+    try {
+        return axios.post(IP + '/' + "signup", admin);
+    }
+    catch(error) {
+        return error
+    }
+}
+
+export function login(admin) {
+    try {
+        return axios.post(IP + '/' + "login", admin);
+    }
+    catch(error) {
+        return error
+    }
+}

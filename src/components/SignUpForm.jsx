@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button'
 import styles from '../styles/SignupForm.module.css'
 import AdminContext from "../context/AdminContext";
 import Alert from "react-bootstrap/Alert";
+import { signUp } from "../lib/api";
 
 const SignUpForm = () => {
     const [email, setEmail] = useState('');
@@ -11,6 +12,7 @@ const SignUpForm = () => {
     const [password2, setPassword2] = useState('');
     const [admin, setAdmin] = useState({});
     const [errorMessage, setErrorMessage] = useState('');
+    const [message, setMessage] = useState('');
     const adminContext = useContext(AdminContext)
     let newAdmin = {};
 
@@ -26,20 +28,19 @@ const SignUpForm = () => {
         setPassword2(event.target.value);
     }
 
-    const handleSignup = (event) => {
+    const handleSignup = async (event) => {
         event.preventDefault();
-        if (email.length < 1) {
-            setErrorMessage('Please provid a valid email')
-        } else if (password1.length < 6) {
+        if (password1.length < 6) {
             setErrorMessage("Password's minimum length is 6 characters")
         } else if (password1 != password2) {
             setErrorMessage("Passwords do not match")
         } else {
             newAdmin = ({
                 email: email,
-                password1: password1,
-                password2: password2,
+                password: password2,
             });
+            await signUp(newAdmin);
+            setMessage("Created new Admin succeessfully");
         }
     }
 
@@ -51,6 +52,11 @@ const SignUpForm = () => {
             {errorMessage && (
                 <Alert variant={'danger'}>
                     {errorMessage}
+                </Alert>
+            )}
+            {message && (
+                <Alert variant={'success'}>
+                    {message}
                 </Alert>
             )}
 

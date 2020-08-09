@@ -15,6 +15,9 @@ const AllStudentsList = () => {
     const getStudents = async () => {
         const studentsDict = await getStudentsList();
         console.log(studentsDict.data);
+        for (let student in studentsDict.data) {
+            console.log(studentsDict.data[student]);
+        }
     }
 
     useEffect(() => {

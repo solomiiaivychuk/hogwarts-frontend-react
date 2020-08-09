@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button'
 import styles from '../styles/LoginForm.module.css'
 import AdminContext from "../context/AdminContext";
 import Alert from "react-bootstrap/Alert";
+import { login } from '../lib/api'
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -11,7 +12,6 @@ const LoginForm = () => {
     const [admin, setAdmin] = useState(null);
     const [errorMessage, setErrorMessage] = useState('');
     const adminContext = useContext(AdminContext);
-    console.log(adminContext);
 
     const onEmailChange = (event) => {
         setEmail(event.target.value)
@@ -21,25 +21,30 @@ const LoginForm = () => {
         setPassword(event.target.value);
     }
 
-    const handleLogin = (event) => {
+    const handleLogin = async (event) => {
         event.preventDefault();
-        if (email.length < 1) {
-            setErrorMessage("Please provide valid email");
-
-        } else if (password.length < 6) {
+        if (password.length < 6) {
             setErrorMessage("Password's minimum length is 6 characters")
         } else {
             const newAdmin = ({
                 email: email,
                 password: password,
             });
-            setAdmin(newAdmin);
-            adminContext.setAdmin(newAdmin);
+            try {
+                login(newAdmin)
+                setAdmin(!admin);
+                //adminContext.setAdmin(admin);
+            }
+            catch(error) {
+                console.log(error);
+                setErrorMessage(error);
+            }
+
         }
     }
 
     useEffect(() => {
-        console.log(admin);
+        adminContext.setAdmin(admin);
     }, [admin]);
 
     return (
