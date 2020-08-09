@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button'
 import Card from 'react-bootstrap/Card'
 import styles from '../styles/AddStudentForm.module.css'
 import SkillsContext from "../context/SkillsContext";
+import { addNewStudent } from "../lib/api";
 
 const AddStudentForm = () => {
     const [email, setEmail] = useState('');
@@ -93,7 +94,7 @@ const AddStudentForm = () => {
     for (let skill of desiredSkillsArray) {
         if (skill.desired === true) {
             studentDesiredSkills.push(skill);
-            desSkillsContext.desiredSkills.push(skill);
+            //desSkillsContext.desiredSkills.push(skill);
         }
     };
 
@@ -168,6 +169,10 @@ const AddStudentForm = () => {
             desiredSkills: studentDesiredSkills,
         }
         console.log(student);
+        const studentOnBackend = async () => {
+            await addNewStudent(student);
+            console.log("added " + student);
+        }
     }
 
     return (

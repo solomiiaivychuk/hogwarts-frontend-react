@@ -1,16 +1,25 @@
-import React, {Fragment, useContext, useState} from "react";
+import React, {Fragment, useContext, useEffect, useState} from "react";
 import styles from '../styles/AllStudentsList.module.css'
 import Card from 'react-bootstrap/Card'
 import StudentsContext from '../context/StudentsContext'
 import ListItem from './ListItem'
 import ListGroup from 'react-bootstrap/ListGroup'
 import SkillsChart from './SkillsChart'
+import { getStudentsList } from '../lib/api'
 
 const AllStudentsList = () => {
     const studContext = useContext(StudentsContext);
     const [studs, setStuds] = useState([]);
     const [load, setLoad] = useState(true);
 
+    const getStudents = async () => {
+        const studentsDict = await getStudentsList();
+        console.log(studentsDict.data);
+    }
+
+    useEffect(() => {
+        getStudents();
+    }, [])
 
     return (
         <div className={styles.ListWrapper}>

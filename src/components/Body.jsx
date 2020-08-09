@@ -7,7 +7,7 @@ import AdminPage from "./AdminPage";
 
 const Body = () => {
     //const adminContext = useContext(AdminContext);
-    const [admin, setAdmin] = useState("null")
+    const [admin, setAdmin] = useState(null)
 
     return (
         <AdminContext.Provider value={{admin, setAdmin, logout: () => setAdmin(null)}}>
