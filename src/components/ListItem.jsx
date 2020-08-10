@@ -26,7 +26,7 @@ const ListItem = () => {
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
 
-    return studContext.studentsFromBE.map((student) => (
+    return studContext.students.map((student) => (
         <>
             <ListGroup.Item as="li" key={student.email} className={styles.ListItem}>
                 <span className={styles.ListItemChildren}>

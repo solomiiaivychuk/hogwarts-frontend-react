@@ -54,7 +54,7 @@ const mockStudents =
     ];
 
 const StudentsContext = React.createContext({
-    studentsFromBE: [],
-    //addStudents: () => {}
+    students: [],
+    addStudents: () => {}
 })
 export default StudentsContext

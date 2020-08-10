@@ -19,7 +19,7 @@ const AllStudentsList = () => {
         for (let student in studentsDict.data) {
             studentsFromBE.push(studentsDict.data[student]);
         }
-        setStuds(studentsFromBE);
+        studContext.addStudents(studentsFromBE);
     }
 
     useEffect(() => {
@@ -27,7 +27,7 @@ const AllStudentsList = () => {
     }, []);
 
     return (
-        <StudentsContext.Provider value={{studentsFromBE: studs}}>
+        // <StudentsContext.Provider value={{studentsFromBE: studs}}>
             <div className={styles.ListWrapper}>
                 {!load &&
                 <Card className={styles.ListCard}>
@@ -46,7 +46,7 @@ const AllStudentsList = () => {
                 )
                 }
             </div>
-        </StudentsContext.Provider>
+        // </StudentsContext.Provider>
 
     )
 }

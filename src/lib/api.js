@@ -18,7 +18,14 @@ export function addNewStudent(studentData) {
         return error;
     }
 }
-
+export function getStudentByEmail(email) {
+    try {
+        return axios.get(IP + '/students/' + email);
+    }
+    catch(error) {
+        return error
+    }
+}
 export function signUp(admin) {
     try {
         return axios.post(IP + '/' + "signup", admin);
