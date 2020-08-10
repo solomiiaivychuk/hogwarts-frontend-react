@@ -4,6 +4,7 @@ import styles from '../styles/ListItem.module.css'
 import Button from 'react-bootstrap/Button'
 import StudentsContext from "../context/StudentsContext";
 import Modal from "react-bootstrap/Modal";
+import {deleteStudent} from "../lib/api";
 
 const ListItem = () => {
     const [studList, setStudList] = useState([]);
@@ -12,14 +13,15 @@ const ListItem = () => {
 
     useEffect(() => {
         setStudList(studContext.students);
-        console.log(studList);
         }, [studList]
     );
 
-    const handleDelete = () => {
-        return null;
+    const handleDelete = async (email) => {
+        console.log(email)
+        await deleteStudent(email);
     }
-    const handleEdit = () => {
+
+    const handleEdit = async (email) => {
         return null;
     }
 
@@ -59,7 +61,10 @@ const ListItem = () => {
                     <Button variant="secondary" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button variant="danger" onClick={handleClose}>
+                    <Button variant="danger" onClick={() => {
+                        handleDelete(student.email);
+                        handleClose();
+                    }}>
                         Delete
                     </Button>
                 </Modal.Footer>

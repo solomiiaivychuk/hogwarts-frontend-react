@@ -26,6 +26,16 @@ export function getStudentByEmail(email) {
         return error
     }
 }
+
+export function deleteStudent(email) {
+    try {
+        return axios.delete(IP + '/students', email);
+    }
+    catch(error) {
+        return error;
+    }
+}
+
 export function signUp(admin) {
     try {
         return axios.post(IP + '/' + "signup", admin);
@@ -43,3 +53,4 @@ export function login(admin) {
         return error
     }
 }
+
