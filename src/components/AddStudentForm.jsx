@@ -5,8 +5,11 @@ import Card from 'react-bootstrap/Card'
 import styles from '../styles/AddStudentForm.module.css'
 import SkillsContext from "../context/SkillsContext";
 import { addNewStudent } from "../lib/api";
+import Alert from 'react-bootstrap/Alert'
 
 const AddStudentForm = () => {
+    const [submitted, setSubmitted] = useState(false)
+
     const [email, setEmail] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -175,15 +178,22 @@ const AddStudentForm = () => {
             existing_skills: studentExistingSkills,
             desired_skills: studentDesiredSkills,
         }
-        console.log(JSON.stringify(student));
-        await addNewStudent(student);
-        console.log("added " + student);
+        try {
+            await addNewStudent(student);
+            setSubmitted(true);
+        }
+        catch(error) {
+            console.log(error);
+        }
     }
 
     return (
         <div className={styles.FormWrapper}>
         <Card className={styles.FormCard}>
             <h4>Fill the student's data</h4>
+            {!submitted && (
+
+
             <Form
                 className={styles.Form}
                 onSubmit={(event) => handleSubmit(event)}>
@@ -307,6 +317,19 @@ const AddStudentForm = () => {
                     Add student
                 </Button>
             </Form>
+
+            )}
+            {submitted && (
+                <Card className={styles.SuccessAlert}>
+                    <Alert variant={"success"}>Added student successfully</Alert>
+                    <Button
+                        variant={"success"}
+                        onClick={() => setSubmitted(false)}
+                        >
+                        Add new student
+                    </Button>
+                </Card>
+            )}
         </Card>
         </div>
     )
