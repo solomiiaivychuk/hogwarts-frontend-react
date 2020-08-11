@@ -181,6 +181,7 @@ const AddStudentForm = () => {
         try {
             await addNewStudent(student);
             setSubmitted(true);
+            console.log(student);
         }
         catch(error) {
             console.log(error);

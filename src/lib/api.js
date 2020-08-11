@@ -28,12 +28,12 @@ export function getStudentByEmail(email) {
 }
 
 export function deleteStudent(email) {
-    try {
-        return axios.delete(IP + '/students', email);
-    }
-    catch(error) {
-        return error;
-    }
+    const httpHeaders = {Authorization: email};
+    const configObj = {headers: httpHeaders, data: {email: email}};
+    return axios.delete(IP + '/students', configObj).then((response) => {
+        return response.data;
+    });
+
 }
 
 export function signUp(admin) {

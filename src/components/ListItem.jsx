@@ -4,12 +4,14 @@ import styles from '../styles/ListItem.module.css'
 import Button from 'react-bootstrap/Button'
 import StudentsContext from "../context/StudentsContext";
 import Modal from "react-bootstrap/Modal";
-import {deleteStudent} from "../lib/api";
+import {deleteStudent, getStudentsList} from "../lib/api";
 
 const ListItem = () => {
     const [studList, setStudList] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const studContext = useContext(StudentsContext);
+    const [toDelete, setToDelete] = useState('');
+    const [message, setMessage] = useState('');
 
     useEffect(() => {
         setStudList(studContext.students);
@@ -17,8 +19,10 @@ const ListItem = () => {
     );
 
     const handleDelete = async (email) => {
-        console.log(email)
-        await deleteStudent(email);
+        deleteStudent(email).then((response) => {
+            console.log(response);
+            setMessage(response);
+         });
     }
 
     const handleEdit = async (email) => {
@@ -46,7 +50,10 @@ const ListItem = () => {
                     {' '}
                     <Button
                         variant="danger"
-                        onClick={handleShow}
+                        onClick={() => {
+                            handleShow();
+                            setToDelete(student.email);
+                        }}
                     >Delete</Button>
 
                 </span>
@@ -56,20 +63,19 @@ const ListItem = () => {
                 <Modal.Header closeButton>
                     <Modal.Title>Delete confirmation</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Are you sure you want to delete the student form the database?</Modal.Body>
+                <Modal.Body>Are you sure you want to delete student form the database?</Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Cancel
                     </Button>
                     <Button variant="danger" onClick={() => {
-                        handleDelete(student.email);
+                        handleDelete(toDelete);
                         handleClose();
                     }}>
                         Delete
                     </Button>
                 </Modal.Footer>
             </Modal>
-
         </>
         )
     )
