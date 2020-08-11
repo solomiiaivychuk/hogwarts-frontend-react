@@ -103,7 +103,7 @@ const AddStudentForm = () => {
     const studentDesiredSkills = [];
     for (let skill of desiredSkillsArray) {
         if (skill.desired === true) {
-            studentDesiredSkills.push(skill.name);
+            studentDesiredSkills.push(skill);
             //desSkillsContext.desiredSkills.push(skill);
         }
     };
@@ -225,49 +225,49 @@ const AddStudentForm = () => {
 
                     <Form.Group controlId="formBasicRange" className={styles.SkillsList}>
                         <h6>Student's skills :</h6>
-                        <Form.Label>Potion making : {potionMakingLevel}</Form.Label>
+                        <Form.Label>Potion making : {potionMakingLevel || 0}</Form.Label>
                         <Form.Control
                             type="range"
                             min={'1'}
                             max={'5'}
                             onChange={(event) => handlePotionMakingLevel(event)}/>
 
-                        <Form.Label>Spells : {spellsLevel}</Form.Label>
+                        <Form.Label>Spells : {spellsLevel || 0}</Form.Label>
                         <Form.Control
                             type="range"
                             min={'1'}
                             max={'5'}
                             onChange={(event) => handleSpellsLevel(event)}/>
 
-                        <Form.Label>Quidditch : {quidditchLevel}</Form.Label>
+                        <Form.Label>Quidditch : {quidditchLevel || 0}</Form.Label>
                         <Form.Control
                             type="range"
                             min={'1'}
                             max={'5'}
                             onChange={(event) => handleQuidditchLevel(event)}/>
 
-                        <Form.Label>Animagus : {animagusLevel}</Form.Label>
+                        <Form.Label>Animagus : {animagusLevel || 0}</Form.Label>
                         <Form.Control
                             type="range"
                             min={'1'}
                             max={'5'}
                             onChange={(event) => handleAnimagusLevel(event)}/>
 
-                        <Form.Label>Apparate : {apparateLevel}</Form.Label>
+                        <Form.Label>Apparate : {apparateLevel || 0}</Form.Label>
                         <Form.Control
                             type="range"
                             min={'1'}
                             max={'5'}
                             onChange={(event) => handleApparateLevel(event)}/>
 
-                        <Form.Label>Metamorphmagi : {metamorphmagiLevel}</Form.Label>
+                        <Form.Label>Metamorphmagi : {metamorphmagiLevel || 0}</Form.Label>
                         <Form.Control
                             type="range"
                             min={'1'}
                             max={'5'}
                             onChange={(event) => handleMetamorphMagiLevel(event)}/>
 
-                        <Form.Label>Parseltongue : {parseltongueLevel}</Form.Label>
+                        <Form.Label>Parseltongue : {parseltongueLevel || 0}</Form.Label>
                         <Form.Control
                             type="range"
                             min={'1'}
