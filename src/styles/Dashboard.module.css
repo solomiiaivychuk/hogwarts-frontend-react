@@ -1,0 +1,13 @@
+.ShowExistingSkills, .ShowDesiredSkills {
+    margin: 2rem 2rem 20rem 2rem;
+    padding: 2rem;
+    flex-basis: 25%;
+}
+.DashboardRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.StudentNumber {
+    padding: 5rem;
+}

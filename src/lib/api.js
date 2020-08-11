@@ -36,6 +36,23 @@ export function deleteStudent(email) {
 
 }
 
+export function getExistingSkill(skill) {
+    const httpHeaders = {Authorization: skill};
+    const configObj = {headers: httpHeaders, data: {skill: skill}};
+    return axios.get(IP + '/existing_skills', configObj).then((response) => {
+        return response;
+    });
+}
+
+export function getDesiredSkill(skill) {
+    try {
+        return axios.get(IP + '/desired_skills', skill)
+    }
+    catch(error) {
+        return error
+    }
+}
+
 export function signUp(admin) {
     try {
         return axios.post(IP + '/' + "signup", admin);
@@ -53,4 +70,6 @@ export function login(admin) {
         return error
     }
 }
+
+
 

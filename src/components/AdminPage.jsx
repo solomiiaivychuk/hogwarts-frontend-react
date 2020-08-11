@@ -7,6 +7,7 @@ import Card from 'react-bootstrap/Card'
 import stylesBackground from '../styles/AdminPage.module.css'
 import StudentPage from "./StudentPage";
 import EditForm from "./EditForm";
+import Dashboard from './Dashboard'
 
 const AdminPage = () => {
     const [students, addStudents] = useState([]);
@@ -20,6 +21,7 @@ const AdminPage = () => {
                     <Link to={'/'} className={styles.HeaderElement}>
                         List of all students
                     </Link>
+                    <Link to={'/dashboard'}>Dashboard</Link>
                     <Link to={'/add-student'} className={styles.HeaderElement}>
                         Add new student
                     </Link>
@@ -28,6 +30,9 @@ const AdminPage = () => {
                     <Switch>
                         <Route exact path={'/'}>
                             <AllStudentsList/>
+                        </Route>
+                        <Route path={'/dashboard'}>
+                            <Dashboard />
                         </Route>
                         <Route path={'/add-student'}>
                             <AddStudentForm/>
