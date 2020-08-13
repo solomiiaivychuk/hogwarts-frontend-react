@@ -10,7 +10,7 @@ import StudentPage from "./StudentPage";
 
 const Body = () => {
     const adminContext = useContext(AdminContext);
-    const [admin, setAdmin] = useState("!null");
+    const [admin, setAdmin] = useState(null);
     const [students, addStudents] = useState([]);
     const [student, setStudent] = useState(null)
 

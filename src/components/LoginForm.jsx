@@ -30,10 +30,9 @@ const LoginForm = () => {
                 email: email,
                 password: password,
             });
+            console.log(newAdmin);
             try {
                 login(newAdmin)
-                setAdmin(!admin);
-                //adminContext.setAdmin(admin);
             }
             catch(error) {
                 console.log(error);

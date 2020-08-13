@@ -39,11 +39,15 @@ const SignUpForm = () => {
                 email: email,
                 password: password2,
             });
-            await signUp(newAdmin);
-            setMessage("Created new Admin succeessfully");
+            try {
+                await signUp(newAdmin);
+                setMessage("Created new Admin succeessfully");
+            }
+            catch (error) {
+                console.log(error)
+            }
         }
     }
-
 
     return (
         <Form
