@@ -1,16 +1,14 @@
 import React, {PureComponent} from 'react';
 import {Cell, Pie, PieChart} from 'recharts';
 import styles from '../styles/SkillsChart.module.css'
+import {getAllSkillsForChart} from "../lib/api";
 
-const skills = [
-    "Potion making",
-    "Spells",
-    "Quidditch",
-    "Animagus",
-    "Apparate",
-    "Metamorphmagi",
-    "Parseltongue",
-    ];
+let skillsArr = [];
+async function getAllSkills() {
+    const response = await getAllSkillsForChart();
+    skillsArr = response.data;
+    console.log(skillsArr)
+}
 
 const data = [
     {name: 'Potion Making', value: 12},
@@ -21,6 +19,7 @@ const data = [
     {name: 'Metamorphmagi', value: 9},
     {name: 'Parseltongue', value: 7},
 ];
+
 
 const COLORS = ['#0088FE', '#FF6666', '#00C49F', '#FFBB28', '#8884D8', '#FF8042', '#E7689D'];
 

@@ -36,15 +36,28 @@ export function deleteStudent(email) {
 
 }
 
-export function getStudnetsHavingSpecificSkill(skill) {
-    return axios.get(IP + '/existing_skills', skill).then((response) => {
-        return response;
-    });
+export function getStudentsHavingSpecificSkill(skill) {
+    try {
+        return axios.post(IP + '/existing_skills', skill);
+    }
+    catch(error) {
+        return error
+    }
 }
 
-export function getDesiredSkill(skill) {
+
+export function getStudentsWantingSpecificSkill(skill) {
     try {
-        return axios.get(IP + '/desired_skills', skill)
+        return axios.post(IP + '/desired_skills', skill)
+    }
+    catch(error) {
+        return error
+    }
+}
+
+export function getStudentsAddedOnDate(date) {
+    try {
+        return axios.post(IP + '/students_added_on_date', date)
     }
     catch(error) {
         return error
@@ -69,5 +82,13 @@ export function login(admin) {
     }
 }
 
+export function getAllSkillsForChart() {
+    try {
+        return axios.get(IP + "/popular_skills");
+    }
+    catch(error) {
+        return error
+    }
+}
 
 
