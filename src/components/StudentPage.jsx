@@ -8,25 +8,46 @@ import {getStudentByEmail} from "../lib/api";
 
 const StudentPage = () => {
     const studentContext = useContext(StudentContext);
-    const [students, setStudents] = useState([]);
+    const [student, setStudent] = useState(null);
     let params = useParams();
-    let student_obj = null;
-    const [student, setStudent] = useState(null)
-
+    let responseObj = null;
+    const existingSkillsArr = []
+    const desiredSkillsArr = []
+    //let student = null;
 
     const getStudent = async () => {
         const response = await getStudentByEmail(params.email);
         const data = response.data;
         for (let key in data) {
-            student_obj = data[key];
+            responseObj = data[key];
         }
-        setStudent(student_obj);
-        console.log(student_obj);
+        for (let skill in responseObj.existing_skills) {
+            const ex_skill = {
+                name: responseObj.existing_skills[skill].skill_name,
+                level: responseObj.existing_skills[skill].skill_level
+            }
+            existingSkillsArr.push(ex_skill)
+           }
+        for (let skill in responseObj.desired_skills) {
+            const des_skill = {
+                name: responseObj.desired_skills[skill].skill_name,
+            }
+            desiredSkillsArr.push(des_skill)
+        }
+        const studentObj = {
+            email: responseObj.email,
+            first_name: responseObj.first_name,
+            last_name: responseObj.last_name,
+            existing_skills: existingSkillsArr,
+            desired_skills: desiredSkillsArr
+        }
+        setStudent(studentObj);
+        console.log(student);
     }
 
     useEffect(() => {
         getStudent();
-    }, [student_obj]);
+    }, []);
 
     return (
         <div className={styles.StudentCard}>
