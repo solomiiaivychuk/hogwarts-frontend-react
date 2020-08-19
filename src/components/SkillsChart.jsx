@@ -3,12 +3,20 @@ import {Cell, Pie, PieChart} from 'recharts';
 import styles from '../styles/SkillsChart.module.css'
 import {getAllSkillsForChart} from "../lib/api";
 
-let skillsArr = [];
-async function getAllSkills() {
-    const response = await getAllSkillsForChart();
-    skillsArr = response.data;
-    console.log(skillsArr)
-}
+// let skillsArr = [];
+// async function getAllSkills() {
+//     const response = await getAllSkillsForChart();
+//     const data = response.data;
+//     console.log(data)
+//     for (let skill in data) {
+//         const skillObj = {
+//             name: data.name,
+//             value: data.value
+//         }
+//         skillsArr.push(skillObj)
+//     }
+//     console.log(skillsArr)
+// };
 
 const data = [
     {name: 'Potion Making', value: 12},
@@ -41,12 +49,32 @@ const renderCustomizedLabel = ({
 class Example extends PureComponent {
     static jsfiddleUrl = 'https://jsfiddle.net/alidingling/c9pL8k61/';
 
+    skillsArr = []
+    async getAllSkills() {
+        const response = await getAllSkillsForChart();
+        const data = response.data;
+        const skills = []
+        for (let skill in data) {
+            const skillObj = {
+                name: data.name,
+                value: data.value
+            }
+            skills.push(skillObj)
+        }
+        console.log(skills)
+        return skills
+    };
+    skillsArr = this.getAllSkills()
     render() {
         return (
             <div className={styles.SkillsChart}>
+                {!this.skillsArr &&
+                <div>!</div>
+                }
+                {this.skillsArr &&
                 <PieChart width={400} height={400}>
                     <Pie
-                        data={data}
+                        data={this.skillsArr}
                         cx={200}
                         cy={200}
                         labelLine={false}
@@ -61,6 +89,7 @@ class Example extends PureComponent {
                         }
                     </Pie>
                 </PieChart>
+                }
                 <div>The most popular desired skills among the students!</div>
                 <div className={styles.Legend}>
                     <p className={styles.LegendItem}>

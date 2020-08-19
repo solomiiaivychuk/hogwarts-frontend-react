@@ -1,12 +1,16 @@
+.DashboardWrapper {
+    display: flex;
+    justify-content: center;
+}
+
 .DashboardCard {
-    margin: 2rem 2rem 25rem 2rem;
+    margin: 2rem;
     padding: 2rem;
     flex-basis: 32%;
 }
-.DashboardRow {
+.DashboardColumn {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
 }
 .StudentList {
     padding: 1rem;

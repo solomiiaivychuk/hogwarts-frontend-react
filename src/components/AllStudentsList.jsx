@@ -41,7 +41,6 @@ const AllStudentsList = () => {
                         <ListGroup as="ul" className={styles.ListCard}>
                             <ListItem></ListItem>
                         </ListGroup>
-                        <SkillsChart/>
                     </Fragment>
                 )
                 }

@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import SkillsChart from './SkillsChart'
 import styles from '../styles/Dashboard.module.css'
 import { getStudentsWantingSpecificSkill, getStudentsHavingSpecificSkill, getStudentsAddedOnDate } from '../lib/api'
 
@@ -71,79 +72,81 @@ const Dashboard = () => {
     }
 
     return(
-        <div className={styles.DashboardRow}>
-            <Card className={styles.DashboardCard}>
-                <Form>
-                    <Form.Group controlId="exampleForm.ControlSelect1">
-                        <Form.Label>Which students have the skill?</Form.Label>
-                        <Form.Control as="select" onChange={handleExSkillChange}>
-                            <option>...</option>
-                            {skillsArr.map((skill) =>
-                                <option key={skill}>{skill}</option>
-                                )
-                            }
-                        </Form.Control>
-                        <ul className={styles.StudentList}> {
-                            listOfStudentsExSkill.map((email) =>
-                            <li key={email}>
-                                <a href={`/student/${email}`}>
-                                {email}
-                                </a>
-                            </li>
-                            )
-                        } </ul>
-                    </Form.Group>
-                </Form>
-            </Card>
-            <Card className={styles.DashboardCard}>
-                <Form>
-                    <Form.Group controlId="exampleForm.ControlSelect1">
-                        <Form.Label>Which students desire the skill</Form.Label>
-                        <Form.Control as="select" onChange={handleDesSkillChange}>
-                            <option>...</option>
-                            {skillsArr.map((skill) =>
-                                <option key={skill}>{skill}</option>
-                            )
-                            }
-                        </Form.Control>
-                            <ul className={styles.StudentList}> {
-                                listOfStudentsDesSkill.map((email) =>
-                                    <li key={email}>
-                                        <a href={`/student/${email}`}>
-                                            {email}
-                                        </a>
-                                    </li>
-                                )
-                            } </ul>
-                    </Form.Group>
-                </Form>
-            </Card>
-            <Card className={styles.DashboardCard}>
-                <Form onSubmit={getStudentsByDate}>
-                    <Form.Group controlId="exampleForm.ControlSelect1">
-                        <Form.Label>Which students were added on date</Form.Label>
-                        <div className={styles.DateInputRow}>
-                            <Form.Control
-                                type="text"
-                                placeholder="YYYY-MM-DD"
-                                onChange={(event) => handleDateChange(event)}
-                            >
+        <div className={styles.DashboardWrapper}>
+            <div className={styles.DashboardColumn}>
+                <Card className={styles.DashboardCard}>
+                    <Form>
+                        <Form.Group controlId="exampleForm.ControlSelect1">
+                            <Form.Label>Which students have the skill?</Form.Label>
+                            <Form.Control as="select" onChange={handleExSkillChange}>
+                                <option>...</option>
+                                {skillsArr.map((skill) =>
+                                    <option key={skill}>{skill}</option>
+                                    )
+                                }
                             </Form.Control>
-                            <Button type="submit">get</Button>
-                        </div>
                             <ul className={styles.StudentList}> {
-                                listOfStudentsDate.map((email) =>
-                                    <li key={email}>
-                                        <a href={`/student/${email}`}>
-                                            {email}
-                                        </a>
-                                    </li>
+                                listOfStudentsExSkill.map((email) =>
+                                <li key={email}>
+                                    <a href={`/student/${email}`}>
+                                    {email}
+                                    </a>
+                                </li>
                                 )
                             } </ul>
-                    </Form.Group>
-                </Form>
-            </Card>
-
+                        </Form.Group>
+                    </Form>
+                </Card>
+                <Card className={styles.DashboardCard}>
+                    <Form>
+                        <Form.Group controlId="exampleForm.ControlSelect1">
+                            <Form.Label>Which students desire the skill</Form.Label>
+                            <Form.Control as="select" onChange={handleDesSkillChange}>
+                                <option>...</option>
+                                {skillsArr.map((skill) =>
+                                    <option key={skill}>{skill}</option>
+                                )
+                                }
+                            </Form.Control>
+                                <ul className={styles.StudentList}> {
+                                    listOfStudentsDesSkill.map((email) =>
+                                        <li key={email}>
+                                            <a href={`/student/${email}`}>
+                                                {email}
+                                            </a>
+                                        </li>
+                                    )
+                                } </ul>
+                        </Form.Group>
+                    </Form>
+                </Card>
+                <Card className={styles.DashboardCard}>
+                    <Form onSubmit={getStudentsByDate}>
+                        <Form.Group controlId="exampleForm.ControlSelect1">
+                            <Form.Label>Which students were added on date</Form.Label>
+                            <div className={styles.DateInputRow}>
+                                <Form.Control
+                                    type="text"
+                                    placeholder="YYYY-MM-DD"
+                                    onChange={(event) => handleDateChange(event)}
+                                >
+                                </Form.Control>
+                                <Button type="submit">get</Button>
+                            </div>
+                                <ul className={styles.StudentList}> {
+                                    listOfStudentsDate.map((email) =>
+                                        <li key={email}>
+                                            <a href={`/student/${email}`}>
+                                                {email}
+                                            </a>
+                                        </li>
+                                    )
+                                } </ul>
+                        </Form.Group>
+                    </Form>
+                </Card>
+            </div>
+            <SkillsChart />
         </div>
     )
 }
